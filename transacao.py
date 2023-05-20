@@ -1,7 +1,11 @@
+# cada transação é um dicionário com 3 chaves(nome,categoria,valor) que fica armazenado na lista dados
 dados = []
 
-# tratar erro ,
 
+# CRIA O ARQUIVO
+def criar_arquivo():
+  arquivo = open('transacoes.csv', 'w')
+    
 # LER O ARQUIVO CSV E TRANSFORMA CADA LINHA EM UM DICIONÁRIO, ADICIONANDO NA LISTA DADOS
 def arquivar():
   with open('transacoes.csv', 'r') as arquivo:
@@ -20,6 +24,7 @@ def arquivar():
   return dados
 
 
+# PRINTA CADA DICIONARIO
 def extrato():
   print("----------------------- EXTRATO -----------------------")
   print(f''.ljust(15), 'NOME'.ljust(15), 'CATEGORIA'.ljust(15), 'VALOR'.ljust(15))
@@ -30,6 +35,7 @@ def extrato():
     print()
 
 
+# FILTRA O DICIONARIO (se categoria não existir, continua pedindo input do user)
 def filtrar():
   while True:
     try:
@@ -52,6 +58,7 @@ def filtrar():
       break
     
 
+# ADICIONA UMA TRANSAÇÃO
 def add():
   try:
     with open('transacoes.csv', 'a') as arquivo:
@@ -61,6 +68,7 @@ def add():
     print("Transação adicionada com sucesso!")
   
 
+# ATUALIZA OS DADOS DE UMA TRANSAÇÃO (se id não existir, continua pedindo input do user)
 def atualizar():
   extrato()
   while True:
@@ -89,7 +97,7 @@ def atualizar():
       break
 
 
-
+# DELETA UMA TRANSAÇÃO (se id não existir, continua pedindo input do user)
 def deletar():
   extrato()
   while True:
@@ -101,6 +109,7 @@ def deletar():
           id_encontrado = True
       if not id_encontrado:
         raise ValueError
+      # tira a transação dos dados e reescreve o arquivo csv
       dados.pop(id - 1)
       with open('transacoes.csv', 'w+') as arquivo:
         for dict in dados:
@@ -112,6 +121,7 @@ def deletar():
       break
   
 
+# USER COLOCA INPUT DE UM ORÇAMENTO, É CALCULADO O VALOR TOTAL QUE JA FOI GASTO, E O VALOR POUPADO
 def budget():
   budget = float(input("Digite seu budget: "))
   total = 0
@@ -121,4 +131,3 @@ def budget():
   print(f"BUDGET".ljust(15), "GASTO".ljust(15), "POUPADO")
   print(str(budget).ljust(15), str(total).ljust(15), str(sobra).ljust(15))
   
-
