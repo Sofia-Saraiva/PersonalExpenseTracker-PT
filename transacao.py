@@ -15,7 +15,7 @@ def arquivar():
       valor = float(colunas[2])
       dict = {
         "id": index + 1,
-        "nome": colunas[0],
+        "nome": colunas[0].replace("*",","),
         "categoria": colunas[1],
         "valor": valor
       }
@@ -39,7 +39,7 @@ def extrato():
 def filtrar():
   while True:
     try:
-      categoria = input("Digite a categoria que deseja filtrar: ").upper()
+      categoria = input("Digite a categoria que deseja filtrar: ").title()
       categoria_encontrada = False
       print("----------------------- EXTRATO -----------------------")
       print(f'ID'.ljust(15), 'NOME'.ljust(15), 'CATEGORIA'.ljust(15), 'VALOR'.ljust(15))
@@ -62,7 +62,13 @@ def filtrar():
 def add():
   try:
     with open('transacoes.csv', 'a') as arquivo:
-      nome, categoria, valor = input("Adicione uma transação: ").upper().split(',')
+      print("Adicione uma transação: ")
+      nome = input("Nome: ").title()
+      # tratar erro nome com ,
+      if ',' in nome:
+        nome = nome.replace(',','*')
+      categoria = input("Categoria: ").title()
+      valor = input("Valor: ")
       arquivo.write(f'{nome},{categoria},{valor}\n')
   finally:
     print("Transação adicionada com sucesso!")
@@ -78,22 +84,29 @@ def atualizar():
       for dict in dados:
         if id == dict['id']:
           id_encontrado = True
-          atualizado = input("Digite os dados da transação: ").upper().split(',')
+          print("Atualize uma transação: ")
+          nome = input("Nome: ").title()
+          categoria = input("Categoria: ").title()
+          valor = input("Valor: ")
           dados[id-1] = {
             "id": id,
-            "nome": atualizado[0],
-            "categoria": atualizado[1],
-            "valor": atualizado[2]
+            "nome": nome,
+            "categoria": categoria,
+            "valor": valor
           }
+
+          with open('transacoes.csv', 'w') as arquivo:
+            for dict in dados:
+              # tratar erro nome com ,
+              dict['nome'] = dict['nome'].replace(',','*')
+              arquivo.write(f"{dict['nome']},{dict['categoria']},{dict['valor']}\n")
+          break
       if not id_encontrado:
         raise ValueError
     except ValueError: 
       print("Transação não existe.")
     else:
       print("Transação atualizada com sucesso!")
-      with open('transacoes.csv', 'w+') as arquivo:
-        for dict in dados:
-          arquivo.write(f"{dict['nome']},{dict['categoria']},{dict['valor']}\n")
       break
 
 
@@ -111,8 +124,10 @@ def deletar():
         raise ValueError
       # tira a transação dos dados e reescreve o arquivo csv
       dados.pop(id - 1)
-      with open('transacoes.csv', 'w+') as arquivo:
+      with open('transacoes.csv', 'w') as arquivo:
         for dict in dados:
+          # tratar erro nome com ,
+          dict['nome'] = dict['nome'].replace(',','*')
           arquivo.write(f"{dict['nome']},{dict['categoria']},{dict['valor']}\n")
     except ValueError:
       print("Transação não existe.")
