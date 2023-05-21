@@ -36,7 +36,6 @@ elif acao == 'ADD':
 elif acao == 'ATT':
   # atualiza a transação e arquiva ela nos dados
   transacao.atualizar()
-  transacao.arquivar()
   
 elif acao == 'DEL':
   # deleta a transação (tira a transação dos dados e reescreve o arquivo csv), apaga a lista de dados e usa a função arquivar para ler o arquivo e puxar as transaçoes pra lista
