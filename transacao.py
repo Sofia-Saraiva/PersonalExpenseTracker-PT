@@ -2,12 +2,12 @@
 dados = []
 
 
-# CRIA O ARQUIVO
 def criar_arquivo():
   arquivo = open('transacoes.csv', 'w')
     
-# LER O ARQUIVO CSV E TRANSFORMA CADA LINHA EM UM DICIONÁRIO, ADICIONANDO NA LISTA DADOS
+
 def arquivar():
+  """Ler o arquivo CSV e transforma cada linha em um dicionário que fica armazenado em uma lista"""
   with open('transacoes.csv', 'r') as arquivo:
     for index, dado in enumerate(arquivo):
       dado = dado.rstrip('\n')
@@ -24,10 +24,10 @@ def arquivar():
   return dados
 
 
-# PRINTA CADA DICIONARIO
 def extrato():
+  """Printa cada dicionário"""
   print("----------------------- EXTRATO -----------------------")
-  print(f''.ljust(15), 'NOME'.ljust(15), 'CATEGORIA'.ljust(15), 'VALOR'.ljust(15))
+  print(f'ID'.ljust(15), 'NOME'.ljust(15), 'CATEGORIA'.ljust(15), 'VALOR'.ljust(15))
   for dict in dados:
     for chave, valor in dict.items():
       valor = str(valor)
@@ -35,8 +35,8 @@ def extrato():
     print()
 
 
-# FILTRA O DICIONARIO (se categoria não existir, continua pedindo input do user)
 def filtrar():
+  """Filtra o dicionário de acordo com categoria. (Se não existir continua pedindo input do user)"""
   while True:
     try:
       categoria = input("Digite a categoria que deseja filtrar: ").title()
@@ -58,8 +58,8 @@ def filtrar():
       break
     
 
-# ADICIONA UMA TRANSAÇÃO
 def add():
+  """Adiciona uma transação"""
   try:
     with open('transacoes.csv', 'a') as arquivo:
       print("Adicione uma transação: ")
@@ -74,8 +74,8 @@ def add():
     print("Transação adicionada com sucesso!")
   
 
-# ATUALIZA OS DADOS DE UMA TRANSAÇÃO (se id não existir, continua pedindo input do user)
 def atualizar():
+  """Atualiza os dados de uma transação. Se ID não existir continua pedindo input do user"""
   extrato()
   while True:
     id = int(input("Digite o ID da transação deseja alterar: "))
@@ -110,8 +110,8 @@ def atualizar():
       break
 
 
-# DELETA UMA TRANSAÇÃO (se id não existir, continua pedindo input do user)
 def deletar():
+  """Deleta uma transação. Se ID não existir, continua pedindo input do user"""
   extrato()
   while True:
     id = int(input("Digite o ID da transação que deseja deletar: "))
@@ -136,8 +136,8 @@ def deletar():
       break
   
 
-# USER COLOCA INPUT DE UM ORÇAMENTO, É CALCULADO O VALOR TOTAL QUE JA FOI GASTO, E O VALOR POUPADO
 def budget():
+  """User coloca input de um orçamento. É calculado o valor total já gasto e o valor poupado"""
   budget = float(input("Digite seu budget: "))
   total = 0
   for dict in dados:
