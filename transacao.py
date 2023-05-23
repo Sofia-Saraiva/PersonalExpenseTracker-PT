@@ -2,6 +2,7 @@
 dados = []
 
 
+
 def criar_arquivo():
   arquivo = open('transacoes.csv', 'w')
     
@@ -138,11 +139,16 @@ def deletar():
 
 def budget():
   """User coloca input de um orçamento. É calculado o valor total já gasto e o valor poupado"""
-  budget = float(input("Digite seu budget: "))
-  total = 0
-  for dict in dados:
-    total += dict['valor']
-  sobra = budget - total
-  print(f"BUDGET".ljust(15), "GASTO".ljust(15), "POUPADO")
-  print(str(budget).ljust(15), str(total).ljust(15), str(sobra).ljust(15))
+  while True:
+    try:
+      budget = float(input("Digite seu budget: "))
+      total = 0
+      for dict in dados:
+        total += dict['valor']
+      sobra = budget - total
+      print(f"BUDGET".ljust(15), "GASTO".ljust(15), "POUPADO")
+      print(str(budget).ljust(15), str(total).ljust(15), str(sobra).ljust(15))
+      break
+    except ValueError:
+      print("Digite um valor.")
   
