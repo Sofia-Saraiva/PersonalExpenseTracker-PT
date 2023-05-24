@@ -38,10 +38,8 @@ elif acao == 'ATT':
   transacao.atualizar()
   
 elif acao == 'DEL':
-  # deleta a transação (tira a transação dos dados e reescreve o arquivo csv), apaga a lista de dados e usa a função arquivar para ler o arquivo e puxar as transaçoes pra lista
+  # deleta a transação
   transacao.deletar()
-  dados = []
-  transacao.arquivar()
 
 elif acao == 'BUD':
   # pede o orçamento do user, dá o valor total gasto e o valor poupado ate o momento
