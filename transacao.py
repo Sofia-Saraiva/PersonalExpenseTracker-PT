@@ -1,4 +1,3 @@
-# cada transação é um dicionário com 3 chaves(nome,categoria,valor) que fica armazenado na lista dados
 dados = []
 
 
