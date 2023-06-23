@@ -1,4 +1,4 @@
-# Personal Expense Tracking
+# Personal Expense Tracker
 
 The Personal Expense Tracking System is a tool developed to assist users in organizing and controlling their finances. This manual aims to provide detailed guidance on each functionality of the system, aiming to make the user experience more objective and simplified.
 
