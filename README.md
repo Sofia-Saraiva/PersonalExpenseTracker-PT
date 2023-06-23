@@ -12,6 +12,7 @@ O sistema possui as seguintes funcionalidades:
 - **Deletar Transação [DEL]:** Permite excluir uma transação.
 - **Orçamento (Budget) [BUD]:** Permite gerenciar um orçamento.
 - **Filtração de categorias [FILTRAR]:** Permite filtrar transações por categoria.
+- **Sair do programa [SAIR]:** Encerra o programa.
 
 ## Requisitos do Sistema
 
